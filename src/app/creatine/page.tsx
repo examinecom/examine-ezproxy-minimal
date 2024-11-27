@@ -5,31 +5,11 @@ async function getCreatine() {
     `https://api.examine.com/v1/interventions/creatine`
   );
 
-  // console.log({ response });
-
-  // if (!response.ok) {
-  //   const { status, statusText } = response;
-  //   return { status, statusText };
-  // }
-
-  return await response.json();
+  return response || null;
 }
 
-export default async function Home() {
-  let creatineData;
-  try {
-    creatineData = await getCreatine();
-  } catch (err) {
-    if (err instanceof Error) {
-      return (
-        <>
-          There was an error fetching:
-          <pre>{err.toString()}</pre>
-        </>
-      );
-    }
-    return "err was not an instance of Error";
-  }
+export default async function Creatine() {
+  const creatineData = await getCreatine().then((r) => r.json());
 
   return (
     <div className="max-w-[900px] mx-auto">
