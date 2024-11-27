@@ -41,21 +41,21 @@ async function getUpdates({
 }
 
 export default async function Home() {
-  const pageUpdatesPromise = getUpdates({
+  const pageUpdates = await getUpdates({
     limit: 5,
     types: "",
     category: "tech,site,supplement_guide,content",
   }).then((r) => r.json());
-  const studyUpdatesPromise = getUpdates({
-    limit: 5,
-    types: "",
-    category: "study_summary",
-  }).then((r) => r.json());
+  // const studyUpdatesPromise = getUpdates({
+  //   limit: 5,
+  //   types: "",
+  //   category: "study_summary",
+  // }).then((r) => r.json());
 
-  const [pageUpdates, studyUpdates] = await Promise.all([
-    pageUpdatesPromise,
-    studyUpdatesPromise,
-  ]);
+  // const [pageUpdates, studyUpdates] = await Promise.all([
+  //   pageUpdatesPromise,
+  //   studyUpdatesPromise,
+  // ]);
 
   console.log({ pageUpdates });
 
@@ -79,7 +79,7 @@ export default async function Home() {
           </li>
         ))}
       </ul>
-      <h2>Study updates:</h2>
+      {/* <h2>Study updates:</h2>
       <ul>
         {studyUpdates.data.map((update: any) => (
           <li key={update.date}>
@@ -94,7 +94,7 @@ export default async function Home() {
             </ul>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
