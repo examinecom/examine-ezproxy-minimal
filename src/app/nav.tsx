@@ -4,6 +4,7 @@ export default function Nav() {
       <a href="/">Updates query</a>
       <a href="/no-query">No query</a>
       <a href="/no-next-options">No next options</a>
+      <a href="/no-query-params">No query params</a>
     </div>
   );
 }
