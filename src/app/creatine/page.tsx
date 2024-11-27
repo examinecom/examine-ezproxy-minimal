@@ -5,17 +5,20 @@ async function getCreatine() {
     `https://api.examine.com/v1/interventions/creatine`
   );
 
-  if (!response.ok) {
-    throw new Error(`Error ${response.status} - ${response.statusText}`);
-  }
+  // console.log({ response });
 
-  return response || null;
+  // if (!response.ok) {
+  //   const { status, statusText } = response;
+  //   return { status, statusText };
+  // }
+
+  return await response.json();
 }
 
 export default async function Home() {
   let creatineData;
   try {
-    creatineData = await getCreatine().then((r) => r.json());
+    creatineData = await getCreatine();
   } catch (err) {
     if (err instanceof Error) {
       return (
@@ -25,7 +28,7 @@ export default async function Home() {
         </>
       );
     }
-    throw err;
+    return "err was not an instance of Error";
   }
 
   return (
