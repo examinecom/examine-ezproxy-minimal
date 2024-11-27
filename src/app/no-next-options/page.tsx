@@ -1,4 +1,4 @@
-import Nav from "./nav";
+import Nav from "../nav";
 
 function appendSearchParams(
   url: URL,
@@ -35,9 +35,7 @@ async function getUpdates({
   }
 
   const endpoint = decodeURIComponent(url.pathname + url.search);
-  const response = await fetch(`https://api.examine.com${endpoint}`, {
-    next: { tags: ["updates"], revalidate: 0 },
-  });
+  const response = await fetch(`https://api.examine.com${endpoint}`);
 
   return response || null;
 }
@@ -48,22 +46,14 @@ export default async function Home() {
     types: "",
     category: "tech,site,supplement_guide,content",
   }).then((r) => r.json());
-  // const studyUpdatesPromise = getUpdates({
-  //   limit: 5,
-  //   types: "",
-  //   category: "study_summary",
-  // }).then((r) => r.json());
-
-  // const [pageUpdates, studyUpdates] = await Promise.all([
-  //   pageUpdatesPromise,
-  //   studyUpdatesPromise,
-  // ]);
 
   console.log({ pageUpdates });
 
   return (
     <div className="max-w-[900px] mx-auto">
       <Nav />
+      <p>This page doesn't pass through any next options:</p>
+      <pre>{'{ tags: ["updates"], revalidate: 0 }'},</pre>
       <h1>Some Examine updates:</h1>
       <h2>Page updates:</h2>
       <ul className="mb-20">
