@@ -7,6 +7,7 @@ export default function Nav() {
       <a href="/no-next-options">No next options</a>
       <a href="/no-query-params">No query params</a>
       <a href="/creatine">Creatine</a>
+      <a href="/nhl">NHL</a>
     </div>
   );
 }
