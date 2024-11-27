@@ -5,6 +5,10 @@ async function getCreatine() {
     `https://api.examine.com/v1/interventions/creatine`
   );
 
+  if (!response.ok) {
+    throw new Error(`Error ${response.status} - ${response.statusText}`);
+  }
+
   return response || null;
 }
 
