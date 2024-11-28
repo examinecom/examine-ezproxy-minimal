@@ -1,22 +1,16 @@
+import { fetchWrapper } from "../fetchWrapper";
 import Nav from "../nav";
 
-async function getUpdates() {
-  const response = await fetch(
-    `https://api.examine.com/v1/updates?per_page=10`
-  );
-
-  return response || null;
-}
-
 export default async function Home() {
-  const pageUpdates = await getUpdates().then((r) => r.json());
+  const pageUpdates = await fetchWrapper(
+    `https://api.examine.com/v1/updates?per_page=10`
+  ).then((r) => r.json());
 
   console.log({ pageUpdates });
 
   return (
     <div className="max-w-[900px] mx-auto">
       <Nav />
-      <p>This page doesn't use any query params in the API call</p>
       <h1>Some Examine updates:</h1>
       <h2>Page updates:</h2>
       <ul className="mb-20">
