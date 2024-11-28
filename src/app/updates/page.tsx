@@ -1,59 +1,22 @@
 import Nav from "../nav";
 
-function appendSearchParams(
-  url: URL,
-  paramKey: string,
-  values: string[]
-): void {
-  values.forEach((value) => {
-    url.searchParams.append(paramKey, value);
-  });
-}
-
-async function getUpdates({
-  limit = 10,
-  types,
-  category,
-}: {
-  limit: number;
-  types: string;
-  category: string;
-}) {
-  const url = new URL(
-    `/v1/updates?per_page=${limit}`,
-    "https://api.examine.com"
+async function getUpdates() {
+  const response = await fetch(
+    `https://api.examine.com/v1/updates?per_page=10`
   );
-
-  if (types) {
-    const typesArray = types.split(",");
-    appendSearchParams(url, "types[]", typesArray);
-  }
-
-  if (category) {
-    const categoriesArray = category.split(",");
-    appendSearchParams(url, "category[]", categoriesArray);
-  }
-
-  const endpoint = decodeURIComponent(url.pathname + url.search);
-  const response = await fetch(`https://api.examine.com${endpoint}`, {
-    next: { tags: ["updates"], revalidate: 0 },
-  });
 
   return response || null;
 }
 
 export default async function Home() {
-  const pageUpdates = await getUpdates({
-    limit: 5,
-    types: "",
-    category: "tech,site,supplement_guide,content",
-  }).then((r) => r.json());
+  const pageUpdates = await getUpdates().then((r) => r.json());
 
   console.log({ pageUpdates });
 
   return (
     <div className="max-w-[900px] mx-auto">
       <Nav />
+      <p>This page doesn't use any query params in the API call</p>
       <h1>Some Examine updates:</h1>
       <h2>Page updates:</h2>
       <ul className="mb-20">
@@ -72,22 +35,6 @@ export default async function Home() {
           </li>
         ))}
       </ul>
-      {/* <h2>Study updates:</h2>
-      <ul>
-        {studyUpdates.data.map((update: any) => (
-          <li key={update.date}>
-            <h3>{update.headline}</h3>
-            <ul>
-              {update.study_summaries.map((study: any) => (
-                <li
-                  key={study.id}
-                  dangerouslySetInnerHTML={{ __html: study.headline }}
-                ></li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 }

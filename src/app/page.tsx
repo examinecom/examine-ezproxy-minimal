@@ -5,6 +5,7 @@ export default async function Home() {
     <div className="max-w-[900px] mx-auto">
       <Nav />
       <p>Home</p>
+      <p>No data is fetched here</p>
     </div>
   );
 }
