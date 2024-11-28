@@ -3,7 +3,7 @@ import Nav from "../nav";
 
 export default async function Home() {
   const pageUpdates = await fetchWrapper(
-    `https://api.examine.com/v1/updates?per_page=10`
+    `https://api-dev.examine.com/v1/updates?per_page=10`
   ).then((r) => r.json());
 
   console.log({ pageUpdates });

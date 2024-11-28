@@ -3,7 +3,7 @@ import Nav from "../nav";
 
 export default async function Creatine() {
   const creatineData = await fetchWrapper(
-    `https://api.examine.com/v1/interventions/creatine`
+    `https://api-dev.examine.com/v1/interventions/creatine`
   ).then((r) => r.json());
 
   return (
