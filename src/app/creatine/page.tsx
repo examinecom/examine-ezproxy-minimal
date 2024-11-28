@@ -1,9 +1,10 @@
+import { apiBaseUrl } from "../apiBaseUrl";
 import { fetchWrapper } from "../fetchWrapper";
 import Nav from "../nav";
 
 export default async function Creatine() {
   const creatineData = await fetchWrapper(
-    `https://api-dev.examine.com/v1/interventions/creatine`
+    `${apiBaseUrl}/v1/interventions/creatine`
   ).then((r) => r.json());
 
   return (
